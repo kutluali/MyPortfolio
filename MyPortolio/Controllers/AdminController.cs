@@ -3,11 +3,11 @@ using MyPortolio.DAL.Context;
 
 namespace MyPortolio.Controllers
 {
-	public class StatisticController : Controller
+	public class AdminController : Controller
 	{
 		private readonly MyPortfolioContext _db;
 
-        public StatisticController(MyPortfolioContext db)
+        public AdminController(MyPortfolioContext db)
         {
             _db=db;
         }

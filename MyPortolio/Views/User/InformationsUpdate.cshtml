@@ -1,0 +1,61 @@
+﻿@model User
+@{
+    ViewData["Title"] = "InformationsUpdate";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Kişisel Bilgiler</h4>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Kişisel Bilgileri Güncelleme Sayfası</div>
+                    </div>
+                    <div class="card-body">
+
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="UserId" />
+
+                            <label> Rolü </label>
+                            <input type="text" asp-for="Name" class="form-control" /> <br />
+
+                            <label> İsim Soyisim </label>
+                            <input type="text" asp-for="UserName" class="form-control" /> <br />
+
+                            <label> Mail Adresi </label>
+                            <input type="email" asp-for="Email" class="form-control" /> <br />
+
+                            <label> Cv </label>
+                            <input type="file" name="CvUrl" asp-for="Cv" class="form-control" /> <br />
+
+                            <label> Fotoğraf </label>
+                            <input type="file" name="file" asp-for="Image" class="form-control" /> <br />
+
+                            <button type="submit" class="btn btn-primary">Bilgileri Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="text-center">
+                            <div class="text-center"> Mevcut Cv && Resim ></div>
+                        </div><br />
+                    </div> <br />
+                    <div>
+                        <p class="text-center">
+                            <a href="~/Admin/img/Cvfile/@Model.Cv" target="_blank">CV'yi Görüntüle</a>
+                        </p>
+                    </div><hr />
+                    <div>
+                        <img src="~/hola/images/portfolio/@Model.Image" alt="" style="width:310px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

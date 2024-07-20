@@ -10,7 +10,7 @@
         public string? Password { get; set; }
 		public string? NewPassword { get; internal set; }
         public string Image { get; set; }
-        public string Cv { get; set; }
+        public string? Cv { get; set; }
 
 	}
 }

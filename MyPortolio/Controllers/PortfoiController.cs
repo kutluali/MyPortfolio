@@ -68,7 +68,7 @@ namespace MyPortfolio.Controllers
                 prt.ImageUrl = filename;
             }
 
-            var record = _db.Portfolios.Add(prt);
+            var record = _db.Portfolios.Update(prt);
             _db.SaveChanges(); return RedirectToAction("Index");
 
         }

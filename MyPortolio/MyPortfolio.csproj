@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Admin\assets\img\Cvfile\" />
     <Folder Include="wwwroot\hola\images\Testimonial\" />
   </ItemGroup>
 

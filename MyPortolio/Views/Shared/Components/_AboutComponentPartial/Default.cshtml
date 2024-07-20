@@ -23,15 +23,20 @@
 
     </div> <!-- end about-content -->
 
- 
 
     <div class="row about-content about-content--buttons">
 
+
         <div class="col-six tab-full left">
-            <a href="#0" class="btn btn--primary full-width">Cv'mi İndir</a>
+            @if (!string.IsNullOrEmpty(ViewBag.cv))
+            {
+                <a href="~/Admin/img/Cvfile/@ViewBag.cv" target="_blank" class="btn btn--primary full-width">Cv'mi İndir</a>
+            }
         </div>
+
         <div class="col-six tab-full right">
-            <a href="#0" class="btn full-width">Bana Yazın</a>
+
+            <a href="#contact" title="contact" class="btn full-width">Bana Yazın</a>
         </div>
 
     </div> <!-- end about-content buttons -->

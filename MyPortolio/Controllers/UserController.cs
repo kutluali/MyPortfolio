@@ -23,58 +23,12 @@ namespace MyPortfolio.Controllers
 		{
 			if (User.Identity!.IsAuthenticated)
 			{
-				return RedirectToAction("Inbox", "Message");
+				return RedirectToAction("Index", "Admin");
 			}
 			return View();
 		}
 
 
-		//public IActionResult Update(int id)
-		//{
-		//	var record = _db.users.SingleOrDefault(x=>x.UserId==id);
-		//	return View(record);
-		//}
-
-		//[HttpPost]
-		//public async Task<IActionResult> Update(User user)
-		//{
-		//	if (ModelState.IsValid)
-		//	{
-		//		//var record = _db.users.SingleOrDefault(x => x.UserId==userid);
-
-		//		if (record == null)
-		//		{
-		//			return NotFound();
-		//		}
-
-		//		// Email ve mevcut şifreyi güncelle
-		//		user.Email = user.Email;
-
-		//		// Şifre değişikliği kontrolü
-		//		if (!string.IsNullOrEmpty(record.Password))
-		//		{
-		//			if (!VerifyPassword(user.Password, user.Password))
-		//			{
-		//				ModelState.AddModelError("", "Current password is incorrect.");
-		//				return View(user);
-		//			}
-
-		//			if (!string.IsNullOrEmpty(user.NewPassword))
-		//			{
-		//				user.Password = HashPassword(user.NewPassword);
-		//			}
-		//		}
-
-		//		_db.Update(user);
-		//		await _db.SaveChangesAsync();
-
-		//		TempData["SuccessMessage"] = "Profile updated successfully.";
-		//		return RedirectToAction("Update");
-		//	}
-
-		//	return View(user);
-
-		//}
 
 		[HttpPost]
 		public async Task<IActionResult> Login(string username, string password)
@@ -110,9 +64,130 @@ namespace MyPortfolio.Controllers
 			return RedirectToAction("Index","Default");
 		}
 
-		public IActionResult CvList()
+        public IActionResult InformationsIndex()
+        {
+            return View(_db.users.ToList());
+        }
+
+        public IActionResult InformationsCreate()
+        {
+            return View();
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> InformationsCreate(User user, IFormFile file, IFormFile CvUrl)
 		{
-			return View();
+            if (file != null)
+            {
+                var imageFilename = Path.GetFileName(file.FileName);
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "hola", "images", "portfolio", imageFilename);
+
+                using (var stream = System.IO.File.Create(imagePath))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                user.Image = imageFilename;
+            }
+
+            if (CvUrl != null)
+            {
+                var pdfFilename = Path.GetFileName(CvUrl.FileName);
+                var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Admin", "img", pdfFilename);
+
+                using (var stream = System.IO.File.Create(pdfPath))
+                {
+                    await CvUrl.CopyToAsync(stream);
+                }
+                user.Cv = pdfFilename;
+            }
+
+            var record = _db.users.Add(user);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+		public IActionResult InformationsUpdate(int id)
+        {
+			var record = _db.users.Find(id);
+			if (record == null)
+			{
+				return NotFound(); // Kullanıcı bulunamazsa hata döndür.
+			}
+			return View(record);
+		}
+
+        [HttpPost]
+        public async Task<IActionResult> InformationsUpdate(User user, IFormFile file, IFormFile CvUrl)
+        {
+			if (file != null && file.Length > 0)
+			{
+				var imageFilename = Path.GetFileName(file.FileName);
+				var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "hola", "images", "portfolio", imageFilename);
+
+				// Dizin oluşturma
+				var imageDirectory = Path.GetDirectoryName(imagePath);
+				if (!Directory.Exists(imageDirectory))
+				{
+					Directory.CreateDirectory(imageDirectory);
+				}
+
+				using (var stream = new FileStream(imagePath, FileMode.Create))
+				{
+					await file.CopyToAsync(stream);
+				}
+				user.Image = imageFilename;
+			}
+
+			if (CvUrl != null && CvUrl.Length > 0)
+			{
+				var pdfFilename = Path.GetFileName(CvUrl.FileName);
+				var pdfPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Admin", "img", "Cvfile", pdfFilename);
+
+				// Dizin oluşturma
+				var pdfDirectory = Path.GetDirectoryName(pdfPath);
+				if (!Directory.Exists(pdfDirectory))
+				{
+					Directory.CreateDirectory(pdfDirectory);
+				}
+
+				using (var stream = new FileStream(pdfPath, FileMode.Create))
+				{
+					await CvUrl.CopyToAsync(stream);
+				}
+				user.Cv = pdfFilename;
+			}
+
+			var existingUser = _db.users.Find(user.UserId);
+			if (existingUser == null)
+			{
+				return NotFound(); // Kullanıcı bulunamazsa hata döndür.
+			}
+
+			existingUser.Name = user.Name;
+			existingUser.UserName = user.UserName;
+			existingUser.Email = user.Email;
+			existingUser.Image = user.Image ?? existingUser.Image; // Var olan resmi koruyun
+			existingUser.Cv = user.Cv ?? existingUser.Cv; // Var olan CV'yi koruyun
+
+			_db.users.Update(existingUser);
+			await _db.SaveChangesAsync();
+			return RedirectToAction("InformationsIndex");
+
+		}
+
+		[HttpGet]
+		public IActionResult DownloadCv()
+		{
+			var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "cv.pdf");
+			var fileBytes = System.IO.File.ReadAllBytes(filePath);
+			return File(fileBytes, "application/pdf", "cv.pdf");
+		}
+
+		[HttpGet]
+		public IActionResult ContactMe()
+		{
+			return Redirect("mailto:example@example.com");
 		}
 	}
 }

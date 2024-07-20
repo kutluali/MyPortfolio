@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyPortfolio.DAL.Entities;
 using MyPortolio.DAL.Context;
 
 namespace MyPortolio.ViewComponents
@@ -13,6 +14,7 @@ namespace MyPortolio.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
+            ViewBag.cv = _db.users.Select(x => x.Cv).FirstOrDefault();
             ViewBag.aboutTitle = _db.Abouts.Select(x => x.Title).FirstOrDefault();
             ViewBag.aboutSubDescription=_db.Abouts.Select(x=>x.SubDescription).FirstOrDefault();
             ViewBag.detail=_db.Abouts.Select(x=>x.Details).FirstOrDefault();
