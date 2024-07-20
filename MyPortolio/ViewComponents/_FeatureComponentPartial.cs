@@ -1,20 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyPortfolio.Models;
 using MyPortolio.DAL.Context;
 
 namespace MyPortolio.ViewComponents
 {
     public class _FeatureComponentPartial : ViewComponent
     {
-        private readonly MyPortfolioContext _db;
+        private readonly MyPortfolioContext _context;
 
-        public _FeatureComponentPartial(MyPortfolioContext db)
+        public _FeatureComponentPartial(MyPortfolioContext context)
         {
-            _db= db;
+            _context = context;
         }
+
         public IViewComponentResult Invoke()
         {
-            return View(_db.Features.ToList());
-        }
+            var socialMedias = _context.SocialMedias.ToList();
+            var features = _context.Features.ToList();
 
+            var model = new SocialMediaFeatureViewModel
+            {
+                SocialMedias = socialMedias,
+                Features = features
+            };
+
+            return View(model);
+
+        }
     }
+
 }
+

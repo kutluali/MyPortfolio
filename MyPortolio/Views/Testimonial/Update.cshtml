@@ -1,0 +1,50 @@
+﻿@model Testimonial
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Referans</h4>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Referans Bilgisi Güncelleme Sayfası</div><br />
+					</div>
+					<div class="card-body">
+
+						<form method="post" enctype="multipart/form-data">
+							<input type="hidden" asp-for="@Model.TestimonialId" />
+
+							<label> Proje Addı </label>
+							<input type="text" asp-for="NameSurname" class="form-control" /> <br />
+
+							<label> Kısa Proje Açıklaması </label>
+							<input type="text" asp-for="Title" class="form-control" /> <br />
+
+							<label> Açıklama </label>
+							<textarea type="text" asp-for="Description" class="form-control" ></textarea> <br />
+
+							<label> Fotoğraf </label>
+							<input type="file" name="file" asp-for="ImageUrl" class="form-control" /> <br />
+
+							<button type="submit" class="btn btn-primary">Referans Bilgisi Güncelle</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card-header">
+					<div class="card-title">Mevcut Resim</div><br />
+				</div>
+				<div>
+					<img src="~/hola/images/Testimonial/@Model.ImageUrl" alt="" style="width: 300px;" />
+					<input type="hidden" asp-for="@Model.ImageUrl" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

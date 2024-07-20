@@ -22,6 +22,7 @@ namespace MyPortolio.Controllers
         {
             return View();
         }
+
         [HttpPost]
 		public IActionResult Create(Experience exp)
         {
@@ -42,20 +43,6 @@ namespace MyPortolio.Controllers
             _db.SaveChanges(); return RedirectToAction("ExperienceList");
 
 		}
-
-        public IActionResult ChangeToDoListToTrue(int id)
-        {
-            var record=_db.ToDoList.Find(id);
-            record.Status = true;
-            _db.SaveChanges(); return RedirectToAction("Index");
-        }
-
-        public IActionResult ChangeToDoListToFalse(int id)
-        {
-            var record = _db.ToDoList.Find(id);
-            record.Status = false;
-            _db.SaveChanges(); return RedirectToAction("Index");
-        }
 
         public IActionResult Delete(int? id)
         {

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MyPortolio.DAL.Context;
 
@@ -10,7 +13,23 @@ internal class Program
 		// Add services to the container.
 		builder.Services.AddControllersWithViews();
 
+		builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+           .AddCookie(options =>
+           {
+	       options.LoginPath = "/User/Login";
+          });
+
+		
 		builder.Services.AddDbContext<MyPortfolioContext>(options => options.UseSqlServer("Server=DESKTOP-6J2APNJ;Database=MyPortfolio;Integrated Security=True; TrustServerCertificate=True;"));
+
+
+		builder.Services.AddMvc(config =>
+		{
+			var policy = new AuthorizationPolicyBuilder()
+							.RequireAuthenticatedUser()
+							.Build();
+			config.Filters.Add(new AuthorizeFilter(policy));
+		});
 
 		var app = builder.Build();
 
@@ -18,7 +37,6 @@ internal class Program
 		if (!app.Environment.IsDevelopment())
 		{
 			app.UseExceptionHandler("/Home/Error");
-			// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 			app.UseHsts();
 		}
 
@@ -27,6 +45,7 @@ internal class Program
 
 		app.UseRouting();
 
+		app.UseAuthentication();
 		app.UseAuthorization();
 
 		app.MapControllerRoute(

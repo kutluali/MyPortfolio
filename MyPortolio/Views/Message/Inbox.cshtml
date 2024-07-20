@@ -39,22 +39,19 @@
                                         <td>@item.Subject</td>
                                         <td>@item.SendDate</td>
                                         <td><a href="~/Message/Detail/@item.MessageId" class="btn btn-warning">Mesajı Aç</a></td>
-                                        @if (item.IsRead==true)
+                                        @if (item.IsRead == true)
                                         {
                                             <td><a href="~/Message/ChangeIsReadToFalse/@item.MessageId" class="btn btn-dark">Okunmadı Olarak İşaretle</a></td>
                                         }
                                         else
                                         {
-                                        <td><a href="~/Message/ChangeIsReadToTrue/@item.MessageId" class="btn btn-info">Okundu Olarak İşaretle</a></td>
+                                            <td><a href="~/Message/ChangeIsReadToTrue/@item.MessageId" class="btn btn-info">Okundu Olarak İşaretle</a></td>
                                         }
-
-                                        <td><a href="~/Message/Delete/@item.MessageId" class="btn btn-danger">Sil</a></td>
-
+                                        <td><a href="~/Message/Delete/@item.MessageId" class="btn btn-danger">Sil</a></td>4
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <td><a href="~/Experience/Create/" class="btn btn-primary">Yeni Deneyim Oluştur.</a>
                     </div>
                 </div>
             </div>

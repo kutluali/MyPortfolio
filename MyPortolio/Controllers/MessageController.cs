@@ -23,6 +23,13 @@ namespace MyPortolio.Controllers
 			_db.SaveChanges(); return RedirectToAction("Inbox");
 		}
 
+        public IActionResult ChangeIsReadToFalse(int id)
+        {
+            var value = _db.Messages.Find(id);
+            value.IsRead = false;
+            _db.SaveChanges(); return RedirectToAction("Inbox");
+        }
+
         public IActionResult Detail(int id)
         {
             return View(_db.Messages.Find(id));

@@ -1,11 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyPortfolio.DAL.Entities;
 using MyPortolio.DAL.Entities;
 
 namespace MyPortolio.DAL.Context
 {
     public class MyPortfolioContext : DbContext
     {
-		public MyPortfolioContext(DbContextOptions<MyPortfolioContext> dbContextOptions) : base(dbContextOptions)
+        public MyPortfolioContext()
+        {
+        }
+
+        public MyPortfolioContext(DbContextOptions<MyPortfolioContext> dbContextOptions) : base(dbContextOptions)
 		{
 
         }
@@ -19,8 +24,8 @@ namespace MyPortolio.DAL.Context
 		public DbSet<Skill> Skills { get; set; }
 		public DbSet<SocialMedia> SocialMedias { get; set; }
 		public DbSet<Testimonial> Testimonials { get; set; }
-
         public DbSet<ToDoList> ToDoList { get; set; }
+		public DbSet<User> users { get; set; }	
 
 	}
 }

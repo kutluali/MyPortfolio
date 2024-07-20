@@ -1,0 +1,60 @@
+﻿@model List<MyPortolio.DAL.Entities.Message>
+
+<div class="col-eight tab-full contact__form">
+
+    @{
+        if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        else if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+    }
+    <form name="contactForm" id="contactForm" method="post" action="">
+        <fieldset>
+            @foreach (var item in Model)
+            {
+                <div class="form-field">
+                    <input name="@item.NameSurname" type="text" id="contactName" placeholder="İsim Soyİsim" value="" minlength="2" required="" aria-required="true" class="full-width">
+                </div>
+                <div class="form-field">
+                    <input name="@item.Email" type="email" id="contactEmail" placeholder="Mail Adresiniz" value="" required="" aria-required="true" class="full-width">
+                </div>
+                <div class="form-field">
+                    <input name="@item.Subject" type="text" id="contactSubject" placeholder="Konusu" value="" class="full-width">
+                </div>
+                <div class="form-field">
+                    <textarea name="@item.MessageDetail" id="contactMessage" placeholder="Açıklama" rows="10" cols="50" required="" aria-required="true" class="full-width"></textarea>
+                </div>
+                <div class="form-field">
+                    <button type="submit" class="full-width btn--primary">Gönder..</button>
+                    <div class="submit-loader">
+                        <div class="text-loader">Gönderiliyor...</div>
+                        <div class="s-loader">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                    </div>
+                </div>
+                break;
+            }
+        </fieldset>
+    </form>
+    <!-- contact-warning -->
+    @* <div class="message-warning">
+    Bir şeyler yanlış gitti. Lütfen tekrar deneyin.
+    </div>
+
+    <!-- contact-success -->
+    <div class="message-success">
+    Mesajınız gönderildi, teşekkür ederiz!<br>
+    </div> *@
+
+</div>

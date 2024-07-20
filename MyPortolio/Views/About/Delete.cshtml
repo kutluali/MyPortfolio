@@ -1,0 +1,44 @@
+﻿@model About
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Deneyinizi Silmek İstiyor Musunuz ?</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <form asp-controller="About" asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="@Model.AboutId">
+                            <div class="col-md-7 offset">
+
+                                <div class="form-group">
+                                    <label for="largeInput">Başlık Bilgisi</label>
+                                    <input type="text" asp-for="Title" class="form-control" id="disableinput" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                <label for="largeInput">Başlık Bilgisi</label>
+                                <input type="text" asp-for="SubDescription" class="form-control" id="disableinput" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="largeInput">Detaylı Açıklama</label>
+                                    <textarea rows="4" asp-for="Details" class="form-control" id="disableinput" disabled>></textarea> <br />
+                                </div>
+
+                                <br />
+                                <button type="submit" class="btn btn-danger">Sil</button>
+                                <a href="~/About/Index" type="button" class="btn btn-success" data-dismiss="modal">İptal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
