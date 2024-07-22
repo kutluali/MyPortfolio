@@ -10,6 +10,10 @@ Admin Page
 Authorization  
 Entity Framework Core  
 Kullanılan Freamework Sürümü Asp.Net Core 6.0  
-![R3](https://github.com/user-attachments/assets/cfbcbbce-fc14-4bc7-841c-6cbbbda39dd6)
-![footer](https://github.com/user-attachments/assets/35cadadb-1ecc-450e-9fc1-6ffc6b187959)![R1](https://github.com/user-attachments/assets/b1bfc054-1e55-486f-ad8f-bb29619e9ecb)
-![R2](https://github.com/user-attachments/assets/49f6ca5a-bf7a-45e0-9cff-5d5e6e4eac09)
+
+![R1](https://github.com/user-attachments/assets/44f07d2f-f46b-4e0f-b419-8e47a8e70866)
+![R2](https://github.com/user-attachments/assets/b7228e17-e517-4c57-8c7a-2513492af90d)
+
+![R3](https://github.com/user-attachments/assets/5d027daf-6750-40c1-bc42-2f5072a54fe8)
+
+![R5](https://github.com/user-attachments/assets/fc5b6754-a42a-4106-839b-ffb3c6eb2b38)
