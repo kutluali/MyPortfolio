@@ -1,15 +1,15 @@
-Murat Hocamın Katkılarıyla :)  
-KULLANILAN TEKNOLOJİLER
-CSS  
-HTML  
-MSSQL  
-Repository  
-Identity  
-Javascript  
-Admin Page  
-Authorization  
-Entity Framework Core  
-Kullanılan Freamework Sürümü Asp.Net Core 6.0  
+# KİŞİSEL WEB SİTE
+Projemiz Kişisel bir portfolio sitesidir. Tek katmnalı mimari üzerine asp.net core 6.0 ile geliştirilmiştir.
+
+## Kullanılan Teknolojiler
+- Asp.Net Core 6.0
+- Admin Panelli
+- Tek Katmanlı
+- JavaScript
+- Bootstrap
+- Identity
+- MSSQL
+- HTML
 
 ![R1](https://github.com/user-attachments/assets/44f07d2f-f46b-4e0f-b419-8e47a8e70866)
 ![R2](https://github.com/user-attachments/assets/b7228e17-e517-4c57-8c7a-2513492af90d)
